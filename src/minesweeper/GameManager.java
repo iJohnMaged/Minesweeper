@@ -132,10 +132,11 @@ public class GameManager {
         cell.revealCell();
 
         if (cell instanceof NumCell && ((NumCell) cell).getVal() == 0) {
-            revealZeros(col + 1, row);
-            revealZeros(col - 1, row);
-            revealZeros(col, row + 1);
-            revealZeros(col, row - 1);
+            for(int dx = -1; dx<=1; dx++){
+                for(int dy=-1;dy<=1;dy++){
+                    revealZeros(col+dx, row+dy);
+                }
+            }
         }
     }
 
