@@ -12,6 +12,7 @@ public class BombCell extends Cell {
 		super(col, row, width);
 		bomb = new ImageView(bomb_image);
 		bomb.setPreserveRatio(true);
+		bomb.setSmooth(true);
 		bomb.setFitHeight(width / 2);
 	}
 

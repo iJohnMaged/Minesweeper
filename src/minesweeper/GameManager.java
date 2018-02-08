@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class GameManager {
 
@@ -25,8 +26,10 @@ public class GameManager {
     private int res;
     private int rows;
     private int numberOfBombs;
+    private final Stage pStage;
 
-    public GameManager(int w, Difficulty diff) {
+    public GameManager(int w, Difficulty diff, Stage pStage) {
+        this.pStage = pStage;
         width = w;
         height = w;
         root = new Pane();
@@ -40,7 +43,6 @@ public class GameManager {
         numberOfBombs = diff.getNumberOfBombs();
         cols = width / res;
         rows = height / res;
-        System.out.println(cols + " " + rows);
         gameEnded = false;
         createGameBoard();
     }
@@ -51,7 +53,6 @@ public class GameManager {
         numberOfBombs = bombs;
         cols = width / res;
         rows = height / res;
-        System.out.println(width + " " + height);
         gameEnded = false;
         createGameBoard();
     }
@@ -87,7 +88,7 @@ public class GameManager {
         cell.getCell().setOnMouseClicked(e->{
             if(e.getButton() == MouseButton.SECONDARY && !cell.isRevealed()){
                 cell.changeMarker();
-            }else if (!cell.isMarked()) {
+            }else if (!cell.isMarked() && !cell.isRevealed()) {
                 if(cell instanceof NumCell && ((NumCell) cell).getVal() == 0){
                     revealZeros(col, row);
                 } else{
@@ -95,6 +96,7 @@ public class GameManager {
                 }
                 checkWin();
             }
+            pStage.sizeToScene();
         });
     }
 

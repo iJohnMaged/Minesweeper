@@ -27,9 +27,6 @@ public class NumCell extends Cell {
 	public NumCell(int col, int row, int width, int value) {
 		super(col, row, width);
 		this.value = value;
-		if(value == 0){
-		    this.getCell().setFill(Color.ANTIQUEWHITE);
-        }
 	}
 
 
@@ -42,8 +39,9 @@ public class NumCell extends Cell {
             changeMarker();
         }
 
+
 		if (value > 0) {
-			Text t = new Text(Integer.toString(value));
+            Text t = new Text(Integer.toString(value));
 			t.setFont(new Font(getSize() / 1.5));
 			t.setFill(colorMapping.get(value));
 			getCellPane().getChildren().add(t);

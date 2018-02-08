@@ -28,7 +28,7 @@ public class Game {
         primaryStage = pStage;
         initializeButtons();
         initializeSliders();
-        gameManager = new GameManager(cellSize * Difficulty.EASY.getNumberOfCells(), Difficulty.EASY);
+        gameManager = new GameManager(cellSize * Difficulty.EASY.getNumberOfCells(), Difficulty.EASY, pStage);
         text = new Text();
         text.setFont(new Font(25));
         text.setFill(Color.RED);
