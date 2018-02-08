@@ -5,13 +5,14 @@ import javafx.scene.image.ImageView;
 
 public class BombCell extends Cell {
 
-	private static final ImageView bomb = new ImageView(new Image(Main.class.getResourceAsStream("img/bomb.png")));
+	private static final Image bomb_image = new Image(Main.class.getResourceAsStream("img/bomb.png"));
+	private final ImageView bomb;
 
 	public BombCell(int col, int row, int width) {
 		super(col, row, width);
+		bomb = new ImageView(bomb_image);
 		bomb.setPreserveRatio(true);
 		bomb.setFitHeight(width / 2);
-//		getCell().setFill(Color.RED);
 	}
 
 	public void revealCell() {

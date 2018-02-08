@@ -20,7 +20,7 @@ public class GameManager {
     * Constant values.
     */
 
-    private final int width;
+    private int width, height;
     private int cols;
     private int res;
     private int rows;
@@ -28,22 +28,32 @@ public class GameManager {
 
     public GameManager(int w, Difficulty diff) {
         width = w;
+        height = w;
         root = new Pane();
-        newGame(diff);
+        root.setMinSize(width, height);
+        resetGame(diff);
     }
 
-    private void resetGame(Difficulty diff) {
+    public void resetGame(Difficulty diff) {
         root.getChildren().clear();
-        res = width / diff.getNumberOfCells();
+        res = Game.cellSize;
         numberOfBombs = diff.getNumberOfBombs();
         cols = width / res;
-        rows = width / res;
+        rows = height / res;
+        System.out.println(cols + " " + rows);
         gameEnded = false;
         createGameBoard();
     }
 
-    public void newGame(Difficulty diff) {
-        resetGame(diff);
+    public void resetGame(int bombs) {
+        root.getChildren().clear();
+        res = Game.cellSize;
+        numberOfBombs = bombs;
+        cols = width / res;
+        rows = height / res;
+        System.out.println(width + " " + height);
+        gameEnded = false;
+        createGameBoard();
     }
 
     private void createGameBoard() {
@@ -110,14 +120,21 @@ public class GameManager {
     private void gameEnd(String msg) {
         StackPane glass = new StackPane();
         glass.setStyle("-fx-background-color: rgba(2, 13, 7, 0.32);");
-        glass.setMinSize(width, width);
+        glass.setMinSize(width, height);
         Text t = new Text(msg);
-        t.setFont(new Font(55));
+        t.setFont(new Font(Math.min(55, width/4)));
         t.setFill(Color.RED);
         t.setStroke(Color.WHITE);
         glass.getChildren().add(t);
         root.getChildren().add(glass);
         gameEnded = true;
+
+        // Reveal all tables after the game has ended.
+        for (int i = 0; i < cols; i++) {
+            for (int j = 0; j < rows; j++) {
+                cells[i][j].revealCell();
+            }
+        }
     }
 
     private void revealZeros(int col, int row) {
@@ -185,6 +202,14 @@ public class GameManager {
 
     public boolean hasGameEnded() {
         return gameEnded;
+    }
+
+    public void setWidth(int width){
+        this.width = width;
+    }
+
+    public void setHeight(int height){
+        this.height = height;
     }
 
 }

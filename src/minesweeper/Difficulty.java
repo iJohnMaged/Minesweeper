@@ -12,6 +12,7 @@ enum Difficulty {
         this.numberOfBombs = numberOfBombs;
     }
 
+
     public int getNumberOfBombs() {
         return numberOfBombs;
     }

@@ -10,7 +10,7 @@ public abstract class Cell {
 
     private int x;
     private int y;
-    private int width;
+    private int size;
     private Color color;
     private Rectangle cell;
     private StackPane cellPane;
@@ -21,7 +21,7 @@ public abstract class Cell {
     public Cell(int col, int row, int width) {
         this.x = col * width;
         this.y = row * width;
-        this.width = width;
+        this.size = width;
         this.revealed = false;
         this.marked = false;
         this.color = Color.WHITE;
@@ -29,7 +29,7 @@ public abstract class Cell {
     }
 
     private void setupCell() {
-        this.cell = new Rectangle(this.x, this.y, this.width, this.width);
+        this.cell = new Rectangle(this.x, this.y, this.size, this.size);
         this.cell.setFill(this.color);
         this.cell.setStroke(Color.BLACK);
         this.cellPane = new StackPane();
@@ -55,7 +55,7 @@ public abstract class Cell {
         if(marker == null){
             marker = new ImageView(markerImg);
             marker.setPreserveRatio(true);
-            marker.setFitHeight(width/2);
+            marker.setFitHeight(size /2);
         }
         return marker;
     }
@@ -68,16 +68,12 @@ public abstract class Cell {
         return marked;
     }
 
-    public void setMarked(Boolean marked){
-        this.marked=marked;
-    }
-
     public void setReveal(Boolean state) {
         revealed = state;
     }
 
-    public int getWidth() {
-        return width;
+    public int getSize() {
+        return size;
     }
 
     public Rectangle getCell() {
