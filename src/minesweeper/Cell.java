@@ -8,8 +8,6 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class Cell {
 
-    private int x;
-    private int y;
     private int size;
     private Color color;
     private Rectangle cell;
@@ -18,9 +16,7 @@ public abstract class Cell {
     private ImageView marker;
     private static final Image markerImg = new Image(Main.class.getResourceAsStream("img/mark.png"));
 
-    public Cell(int col, int row, int width) {
-        this.x = col * width;
-        this.y = row * width;
+    public Cell(int width) {
         this.size = width;
         this.revealed = false;
         this.marked = false;
@@ -36,7 +32,6 @@ public abstract class Cell {
         cellPane.setMinSize(0, 0);
         cellPane.setMaxSize(this.size, this.size);
         this.cellPane.getChildren().add(this.cell);
-        this.cellPane.relocate(this.x, this.y);
     }
 
     public abstract void revealCell();

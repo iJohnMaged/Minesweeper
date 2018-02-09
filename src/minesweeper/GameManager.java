@@ -65,9 +65,9 @@ public class GameManager {
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
                 if (NumericalCells[i][j] != -1) {
-                    cells[i][j] = new NumCell(i, j, res, NumericalCells[i][j]);
+                    cells[i][j] = new NumCell(res, NumericalCells[i][j]);
                 } else {
-                    cells[i][j] = new BombCell(i, j, res);
+                    cells[i][j] = new BombCell(res);
                 }
                 GridPane.setConstraints(cells[i][j].getCellPane(), i, j);
                 gameBoard.getChildren().add(cells[i][j].getCellPane());

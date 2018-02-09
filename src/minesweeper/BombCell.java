@@ -8,8 +8,8 @@ public class BombCell extends Cell {
 	private static final Image bomb_image = new Image(Main.class.getResourceAsStream("img/bomb.png"));
 	private final ImageView bomb;
 
-	public BombCell(int col, int row, int width) {
-		super(col, row, width);
+	public BombCell(int width) {
+		super(width);
 		bomb = new ImageView(bomb_image);
 		bomb.setPreserveRatio(true);
 		bomb.setSmooth(true);

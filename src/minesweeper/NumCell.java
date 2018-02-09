@@ -26,8 +26,8 @@ public class NumCell extends Cell {
 	    colorMapping.put(8, Color.web("#808080"));
     }
 
-	public NumCell(int col, int row, int width, int value) {
-		super(col, row, width);
+	public NumCell(int width, int value) {
+		super(width);
 		this.value = value;
 	}
 
