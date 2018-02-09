@@ -14,9 +14,7 @@ public class Main extends Application {
         Scene scene = game.getGameScene();
         primaryStage.setTitle("Minesweeper");
         primaryStage.setScene(scene);
-//        primaryStage.minWidthProperty().bind(scene.heightProperty().multiply(2));
-//        primaryStage.minHeightProperty().bind(scene.widthProperty().divide(2));
-//        primaryStage.setResizable(false);
+        primaryStage.setResizable(false);
         primaryStage.sizeToScene();
         primaryStage.show();
         primaryStage.setOnCloseRequest(e-> {Platform.exit(); System.exit(0);});

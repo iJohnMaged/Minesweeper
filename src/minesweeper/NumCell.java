@@ -2,7 +2,9 @@ package minesweeper;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,8 +44,9 @@ public class NumCell extends Cell {
 
 		if (value > 0) {
             Text t = new Text(Integer.toString(value));
-			t.setFont(new Font(getSize() / 1.5));
+			t.setFont(Font.font("Arial", FontWeight.BOLD, getSize()/1.5));
 			t.setFill(colorMapping.get(value));
+			t.setTextAlignment(TextAlignment.CENTER);
 			getCellPane().getChildren().add(t);
 		} else {
 			getCell().setFill(Color.ANTIQUEWHITE);

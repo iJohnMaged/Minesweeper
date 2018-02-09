@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -15,7 +16,7 @@ public class GameManager {
 
     private static Random gen = new SecureRandom();
     private Cell[][] cells;
-    private Pane root;
+    private StackPane root;
     private boolean gameEnded;
     /*
     * Constant values.
@@ -26,13 +27,11 @@ public class GameManager {
     private int res;
     private int rows;
     private int numberOfBombs;
-    private final Stage pStage;
 
-    public GameManager(int w, Difficulty diff, Stage pStage) {
-        this.pStage = pStage;
+    public GameManager(int w, Difficulty diff) {
         width = w;
         height = w;
-        root = new Pane();
+        root = new StackPane();
         root.setMinSize(width, height);
         resetGame(diff);
     }
@@ -61,6 +60,8 @@ public class GameManager {
         int[][] NumericalCells = createNumericalBoard();
         cells = new Cell[cols][rows];
 
+        GridPane gameBoard = new GridPane();
+
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
                 if (NumericalCells[i][j] != -1) {
@@ -68,9 +69,11 @@ public class GameManager {
                 } else {
                     cells[i][j] = new BombCell(i, j, res);
                 }
-                root.getChildren().add(cells[i][j].getCellPane());
+                GridPane.setConstraints(cells[i][j].getCellPane(), i, j);
+                gameBoard.getChildren().add(cells[i][j].getCellPane());
             }
         }
+        root.getChildren().add(gameBoard);
         enableMouseClickAll();
     }
 
@@ -88,7 +91,7 @@ public class GameManager {
         cell.getCell().setOnMouseClicked(e->{
             if(e.getButton() == MouseButton.SECONDARY && !cell.isRevealed()){
                 cell.changeMarker();
-            }else if (!cell.isMarked() && !cell.isRevealed()) {
+            }else if (e.getButton() == MouseButton.PRIMARY && !cell.isMarked() && !cell.isRevealed()) {
                 if(cell instanceof NumCell && ((NumCell) cell).getVal() == 0){
                     revealZeros(col, row);
                 } else{
@@ -96,7 +99,6 @@ public class GameManager {
                 }
                 checkWin();
             }
-            pStage.sizeToScene();
         });
     }
 
@@ -198,7 +200,7 @@ public class GameManager {
         return NumericalCells;
     }
 
-    public Pane getGameBoard() {
+    public StackPane getGameBoard() {
         return this.root;
     }
 

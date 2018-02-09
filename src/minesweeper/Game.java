@@ -20,15 +20,15 @@ public class Game {
     private HBox customGameSliders;
     private GameManager gameManager;
     private Text text;
-    public static final int cellSize = 20;
+    public static final int cellSize = 25;
     private final Stage primaryStage;
 
     public Game(Stage pStage) {
 
         primaryStage = pStage;
         initializeButtons();
-        initializeSliders();
-        gameManager = new GameManager(cellSize * Difficulty.EASY.getNumberOfCells(), Difficulty.EASY, pStage);
+        initializeCustomGameSliders();
+        gameManager = new GameManager(cellSize * Difficulty.EASY.getNumberOfCells(), Difficulty.EASY);
         text = new Text();
         text.setFont(new Font(25));
         text.setFill(Color.RED);
@@ -37,13 +37,13 @@ public class Game {
         VBox gameBox = new VBox();
         HBox gameBoard = new HBox(gameManager.getGameBoard());
         gameBoard.setAlignment(Pos.CENTER);
-        gameBox.getChildren().addAll(text,customGameSliders, difficultyControllers, gameBoard);
+        gameBox.getChildren().addAll(text, customGameSliders, difficultyControllers, gameBoard);
         gameBox.setAlignment(Pos.CENTER);
         gameBox.setSpacing(5);
         gameScene = new Scene(gameBox);
     }
 
-    private void initializeSliders(){
+    private void initializeCustomGameSliders(){
         Slider cols = new Slider(8, 32, 8);
         Slider rows = new Slider(8, 32, 8);
         Slider bombs = new Slider(10, (int) cols.getValue()*rows.getValue(), 10);

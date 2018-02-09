@@ -29,10 +29,12 @@ public abstract class Cell {
     }
 
     private void setupCell() {
-        this.cell = new Rectangle(this.x, this.y, this.size, this.size);
+        this.cell = new Rectangle(this.size, this.size);
         this.cell.setFill(this.color);
         this.cell.setStroke(Color.BLACK);
         this.cellPane = new StackPane();
+        cellPane.setMinSize(0, 0);
+        cellPane.setMaxSize(this.size, this.size);
         this.cellPane.getChildren().add(this.cell);
         this.cellPane.relocate(this.x, this.y);
     }
